@@ -1,5 +1,5 @@
 (function () {
-  // Create the chat button
+  // Create the chat button testing new
   let chatButton = document.createElement("button");
   chatButton.style.position = "fixed"; // Fixed position
   chatButton.style.bottom = "20px"; // Position from the bottom
