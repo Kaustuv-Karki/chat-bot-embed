@@ -127,7 +127,7 @@
   sendButton.style.transition = "background 0.3s ease";
 
   // Function to send a message
-  function sendMessage() {
+  async function sendMessage() {
     let message = chatInput.value.trim();
     if (message) {
       // Disable the send button and show loading
@@ -155,12 +155,11 @@
       // Scroll to the bottom
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      // Simulate API call delay (2 seconds)
-      setTimeout(() => {
-        // Re-enable the send button
-        sendButton.disabled = false;
-        sendButton.innerHTML = "Send";
-        sendButton.style.background = "#007bff";
+      // Simulate API call to Random User API
+      try {
+        const response = await fetch("https://randomuser.me/api/");
+        const data = await response.json();
+        const randomName = data.results[0].name.first; // Get a random name
 
         // Bot response (aligned to the left)
         let botMessage = document.createElement("div");
@@ -175,7 +174,7 @@
         botAvatar.style.fontSize = "16px";
 
         let botText = document.createElement("div");
-        botText.innerText = "Thanks for your message!";
+        botText.innerText = `Hello, my name is ${randomName}. How can I help you?`;
         botText.style.padding = "8px";
         botText.style.background = "#f1f1f1";
         botText.style.borderRadius = "10px 10px 10px 0";
@@ -187,7 +186,21 @@
 
         // Scroll to the bottom
         chatMessages.scrollTop = chatMessages.scrollHeight;
-      }, 2000); // Simulated 2-second delay
+      } catch (error) {
+        console.error("Error fetching API:", error);
+        let botMessage = document.createElement("div");
+        botMessage.innerText = "Sorry, something went wrong. Please try again.";
+        botMessage.style.padding = "8px";
+        botMessage.style.background = "#f1f1f1";
+        botMessage.style.borderRadius = "10px 10px 10px 0";
+        botMessage.style.maxWidth = "70%";
+        chatMessages.appendChild(botMessage);
+      }
+
+      // Re-enable the send button
+      sendButton.disabled = false;
+      sendButton.innerHTML = "Send";
+      sendButton.style.background = "#007bff";
 
       // Clear the input field
       chatInput.value = "";
