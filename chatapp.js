@@ -1,9 +1,9 @@
 (function () {
   // Create the chat button
   let chatButton = document.createElement("button");
-  chatButton.style.position = "fixed";
-  chatButton.style.bottom = "20px";
-  chatButton.style.right = "20px";
+  chatButton.style.position = "fixed"; // Fixed position
+  chatButton.style.bottom = "20px"; // Position from the bottom
+  chatButton.style.right = "20px"; // Position from the right
   chatButton.style.width = "60px";
   chatButton.style.height = "60px";
   chatButton.style.border = "none";
@@ -13,7 +13,7 @@
   chatButton.style.padding = "5px";
   chatButton.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.2)";
   chatButton.style.overflow = "hidden";
-  chatButton.style.zIndex = "1000";
+  chatButton.style.zIndex = "1000"; // Ensure it's on top
   chatButton.style.transition = "transform 0.2s ease-in-out, box-shadow 0.2s";
 
   // Add FontAwesome CSS for icons
@@ -44,9 +44,9 @@
   // Create the chat box
   let chatBox = document.createElement("div");
   chatBox.id = "chatbox-widget";
-  chatBox.style.position = "fixed";
-  chatBox.style.bottom = "80px";
-  chatBox.style.right = "20px";
+  chatBox.style.position = "fixed"; // Fixed position
+  chatBox.style.bottom = "80px"; // Position from the bottom
+  chatBox.style.right = "20px"; // Position from the right
   chatBox.style.width = "400px"; // Larger width
   chatBox.style.height = "500px"; // Larger height
   chatBox.style.background = "#fff";
@@ -54,7 +54,7 @@
   chatBox.style.boxShadow = "0px 6px 12px rgba(0, 0, 0, 0.2)";
   chatBox.style.borderRadius = "10px";
   chatBox.style.overflow = "hidden";
-  chatBox.style.zIndex = "1000";
+  chatBox.style.zIndex = "1000"; // Ensure it's on top
   chatBox.style.display = "none";
   chatBox.style.flexDirection = "column";
 
