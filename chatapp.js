@@ -156,16 +156,13 @@
 
       // Send request to the API
       try {
-        const response = await fetch(
-          "http://165.73.253.224/api/bitbot/respond",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ message: message }), // Sending user message in the request body
-          }
-        );
+        const response = await fetch("http://localhost:3001/api/proxy", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ query: message }), // Sending user message in the request body
+        });
 
         const data = await response.json();
 
@@ -182,7 +179,7 @@
         botAvatar.style.fontSize = "16px";
 
         let botText = document.createElement("div");
-        botText.innerText = data.reply || "Sorry, I didn't understand that."; // Using API response
+        botText.innerHTML = data.response || "Sorry, I didn't understand that."; // Using API response
         botText.style.padding = "8px";
         botText.style.background = "#f1f1f1";
         botText.style.borderRadius = "10px 10px 10px 0";
