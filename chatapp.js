@@ -126,16 +126,15 @@
   sendButton.style.fontSize = "14px";
   sendButton.style.transition = "background 0.3s ease";
 
-  // Function to send a message
   async function sendMessage() {
     let message = chatInput.value.trim();
     if (message) {
-      // Disable the send button and show loading
+      // Disable the send button and show loading spinner
       sendButton.disabled = true;
-      sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // Loading spinner
+      sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
       sendButton.style.background = "#ccc";
 
-      // User message (aligned to the right)
+      // Display user message
       let userMessage = document.createElement("div");
       userMessage.style.display = "flex";
       userMessage.style.justifyContent = "flex-end";
@@ -155,13 +154,22 @@
       // Scroll to the bottom
       chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      // Simulate API call to Random User API
+      // Send request to the API
       try {
-        const response = await fetch("https://randomuser.me/api/");
-        const data = await response.json();
-        const randomName = data.results[0].name.first; // Get a random name
+        const response = await fetch(
+          "http://165.73.253.224/api/bitbot/respond",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message: message }), // Sending user message in the request body
+          }
+        );
 
-        // Bot response (aligned to the left)
+        const data = await response.json();
+
+        // Display bot response
         let botMessage = document.createElement("div");
         botMessage.style.display = "flex";
         botMessage.style.alignItems = "center";
@@ -174,7 +182,7 @@
         botAvatar.style.fontSize = "16px";
 
         let botText = document.createElement("div");
-        botText.innerText = `Hello, my name is ${randomName}. How can I help you?`;
+        botText.innerText = data.reply || "Sorry, I didn't understand that."; // Using API response
         botText.style.padding = "8px";
         botText.style.background = "#f1f1f1";
         botText.style.borderRadius = "10px 10px 10px 0";
@@ -202,7 +210,7 @@
       sendButton.innerHTML = "Send";
       sendButton.style.background = "#007bff";
 
-      // Clear the input field
+      // Clear input field
       chatInput.value = "";
     }
   }
