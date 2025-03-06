@@ -156,13 +156,17 @@
 
       // Send request to the API
       try {
-        const response = await fetch("http://localhost:3001/api/proxy", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ query: message }), // Sending user message in the request body
-        });
+        // const response = await fetch("http://localhost:3001/api/proxy", {
+        const response = await fetch(
+          "http://165.73.253.224/api/bitbot/respond",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ query: message }), // Sending user message in the request body
+          }
+        );
 
         const data = await response.json();
 
